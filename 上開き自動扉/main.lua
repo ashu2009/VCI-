@@ -165,21 +165,22 @@ function DoorPut()
     --開状態
     if DOOR_MOVE.open_flg then
         --スケール1基準
-        clock_est = (DOOR_MOVE.open_clock_max-(os.clock() - DOOR_MOVE.now_open_clock)) / DOOR_MOVE.open_clock_max
+        clock_est = (DOOR_MOVE.open_clock_max - (os.clock() - DOOR_MOVE.now_open_clock)) / DOOR_MOVE.open_clock_max
         --最大値行かないように
         if clock_est <= 0 then
             clock_est = 0
         end
     else
         --スケール0基準
-        clock_est =  (os.clock() - DOOR_MOVE.now_close_clock) / DOOR_MOVE.close_clock_max
+        clock_est = (os.clock() - DOOR_MOVE.now_close_clock) / DOOR_MOVE.close_clock_max
         --最大値行かないように
         if clock_est >= 1 then
             clock_est = 1
         end
     end
+
     --相対移動量計算
-    local door_move_amount = DOOR_DATA.door_def_scalerange * (1-clock_est) * flame_si_scale.x
+    local door_move_amount = DOOR_DATA.door_def_scalerange * (1 - clock_est) * flame_si_scale.y
     --ローカル移動量計算
     local loc_move_amount = RelativeToLocalCoordinates(flame_si, 0, door_move_amount, 0)
 
@@ -187,7 +188,7 @@ function DoorPut()
     local r_door_si = DOOR_DATA.str_door_si[DOOR_DATA.str_door_r_door]
     r_door_si.SetLocalPosition(flame_si_pos + loc_move_amount)
     r_door_si.SetRotation(flame_si_rot)
-    flame_si_scale.y=flame_si_scale.y*clock_est
+    flame_si_scale.y = flame_si_scale.y * clock_est
     r_door_si.SetLocalScale(flame_si_scale)
     --左
     local l_door_si = DOOR_DATA.str_door_si[DOOR_DATA.str_door_l_door]
