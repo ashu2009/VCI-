@@ -880,7 +880,7 @@ function PermissionPut(put_flg, board_pos, high_pos, wide_pos, w_bk_num)
     --右下
     for i = 1, #board_pos[1] do
         --どっちかが限界
-        if high_pos + i >= #board_pos[1] or wide_pos + i >= #board_pos[1] then
+        if high_pos + i > #board_pos[1] or wide_pos + i > #board_pos[1] then
             break
         end
         --何もない
