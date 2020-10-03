@@ -148,6 +148,8 @@ function Main()
                 STATE.Set("BOMB_RING", min_num)
             end
         else
+            MOVE.show_clock = MOVE.def_clock + os.clock()
+            TimerFunc()
             STATE.Set("BOMB_RING", 0)
             AllStopAudio(DATA.sound_str1)
         end
